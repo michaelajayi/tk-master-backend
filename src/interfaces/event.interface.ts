@@ -4,19 +4,21 @@ export enum EEventTicketType {
   VIP = "vip",
 }
 
+export interface ITicket {
+  sec: number;
+  row: string;
+  seat: number;
+  type: EEventTicketType;
+}
+
 export interface IEvent {
-  ticket_type: EEventTicketType;
   artist: string;
-  ticket_config: {
-    sec: number;
-    row: string;
-    seat: number;
-  };
+  tickets: ITicket[];
   banner: string;
   title: string;
   date: {
-    start: Date,
-    end?: Date,
+    start: Date;
+    end?: Date;
   };
   venue: string;
   description?: string;

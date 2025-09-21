@@ -28,16 +28,8 @@ export const getEvents = async (req: Request, res: Response) => {
 
 export const addEvent = async (req: Request, res: Response) => {
   try {
-    const {
-      ticket_type,
-      ticket_config,
-      banner,
-      artist,
-      title,
-      date,
-      venue,
-      description,
-    } = req.body;
+    const { tickets, banner, artist, title, date, venue, description } =
+      req.body;
 
     // return console.log('req.body', req.body);
 
@@ -51,8 +43,7 @@ export const addEvent = async (req: Request, res: Response) => {
       description,
       artist,
       date: parsedDate,
-      ticket_type,
-      ticket_config,
+      tickets,
       banner,
       venue,
     });
@@ -74,6 +65,36 @@ export const addEvent = async (req: Request, res: Response) => {
     }
 
     // fallback for non-standard errors
+    return res.status(500).json({
+      message: "An unexpected error occured",
+      err,
+    });
+  }
+};
+
+export const getEventById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const event = await EventModel.findById(id);
+
+    if (!event) {
+      return res.status(404).json({
+        message: "Event not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Event fetched successfully",
+      event,
+    });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      res.status(500).json({
+        message: "Failed to fetch event",
+        error: err.message,
+      });
+    }
+
     return res.status(500).json({
       message: "An unexpected error occured",
       err,
