@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use("/api", eventRoutes);
+app.use("/api/events", eventRoutes);
 
 // Health check route
 app.get("/", (req: Request, res: Response) => {
