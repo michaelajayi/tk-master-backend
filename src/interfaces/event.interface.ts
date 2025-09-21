@@ -11,9 +11,11 @@ export interface ITicket {
   type: EEventTicketType;
 }
 
+import { Types } from "mongoose";
+
 export interface IEvent {
   artist: string;
-  tickets: ITicket[];
+  tickets: Types.ObjectId[]; // Array of Ticket IDs
   banner: string;
   title: string;
   date: {

@@ -1,27 +1,9 @@
 import { model, Schema } from "mongoose";
-import {
-  EEventTicketType,
-  IEventDocument,
-} from "../interfaces/event.interface";
-
-// Define the ticket schema for each ticket in the event
-const ticketSchema = new Schema(
-  {
-    sec: { type: Number, required: true },
-    row: { type: String, required: true },
-    seat: { type: Number, required: true },
-    type: {
-      type: String,
-      enum: Object.values(EEventTicketType),
-      required: true,
-    },
-  },
-  { _id: false },
-);
+import { IEventDocument } from "../interfaces/event.interface";
 
 const eventFields: Record<string, any> = {
   artist: { type: String, required: true },
-  tickets: { type: [ticketSchema], required: true },
+  tickets: [{ type: Schema.Types.ObjectId, ref: "tickets" }],
   banner: { type: String, required: true },
   title: { type: String, required: true },
   date: {
