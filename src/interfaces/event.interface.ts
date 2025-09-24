@@ -16,14 +16,27 @@ import { Types } from "mongoose";
 export interface IEvent {
   artist: string;
   tickets: Types.ObjectId[]; // Array of Ticket IDs
-    banner: string;
-    title: string;
-    date: {
-      start: Date;
-      end?: Date;
-    };
-    venue: string;
-    description?: string;
-  }
+  banner: string;
+  title: string;
+  date: {
+    start: Date;
+    end?: Date;
+  };
+  venue: string;
+  description?: string;
+}
 
-export interface IEventDocument extends Document {}
+import { ITicketDocument } from "./ticket.interface";
+
+export interface IEventDocument extends Document {
+  artist: string;
+  tickets: (Types.ObjectId | ITicketDocument)[];
+  banner: string;
+  title: string;
+  date: {
+    start: Date;
+    end?: Date;
+  };
+  venue: string;
+  description?: string;
+}

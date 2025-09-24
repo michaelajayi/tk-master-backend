@@ -67,7 +67,7 @@ export const addEvent = async (req: Request, res: Response) => {
     await event.save();
 
     // Create ticket documents, referencing the event
-    const ticketDocs = tickets.map((ticket) => ({
+    const ticketDocs = tickets.map((ticket: { price: number; quantity: number }) => ({
       ...ticket,
       event: event._id,
     }));
