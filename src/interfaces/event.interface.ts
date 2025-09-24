@@ -1,3 +1,5 @@
+import { ITicketDocument } from "./ticket.interface";
+
 export enum EEventTicketType {
   GENERAL_ADMISSION = "general_admission",
   PREMIUM = "premium",
@@ -7,7 +9,7 @@ export enum EEventTicketType {
 export interface ITicket {
   sec: number;
   row: string;
-  seat: number;
+  seat: string;
   type: EEventTicketType;
 }
 
@@ -26,7 +28,6 @@ export interface IEvent {
   description?: string;
 }
 
-import { ITicketDocument } from "./ticket.interface";
 
 export interface IEventDocument extends Document {
   artist: string;

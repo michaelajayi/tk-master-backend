@@ -4,7 +4,7 @@ import { EEventTicketType } from "../interfaces/event.interface";
 export const ticketSchema = z.object({
   sec: z.number().nonoptional(),
   row: z.string().nonempty().nonoptional(),
-  seat: z.number().nonoptional(),
+  seat: z.string().nonoptional(),
   type: z.enum(EEventTicketType),
 });
 
